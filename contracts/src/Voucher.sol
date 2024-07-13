@@ -1,15 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract Voucher {
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+
+contract Voucher is ReentrancyGuard {
     address public owner;
     mapping(bytes32 => uint) public vouchers; // Mapping from code hash to amounts in wei
 
-    constructor() {
-        owner = msg.sender;
+    constructor(address _owner) {
+        owner = _owner;
     }
 
-    // Modifier to restrict access to the owner
     modifier isOwner() {
         require(
             msg.sender == owner,
@@ -18,28 +19,28 @@ contract Voucher {
         _;
     }
 
-    // Function to create a voucher
-    // _codeHash: Hash of the voucher code
-    // _etherAmount: Amount of ether (in wei) to be assigned to the voucher
-    function createVoucher(
-        bytes32 _codeHash,
+    function createVouchers(
+        bytes32[] memory _codeHashes,
         uint _etherAmount
-    ) public payable {
-        require(_etherAmount > 0, "The amount must be greater than 0");
-        uint _amountInWei = _etherAmount; // amount in wei
-        require(vouchers[_codeHash] == 0, "Voucher already exists");
+    ) public payable isOwner {
+        require(_etherAmount > 0, "Amount must be greater than 0");
+        uint _totalAmountInWei = _etherAmount * _codeHashes.length; // total amount in wei
         require(
-            msg.value == _amountInWei,
-            "The sent ether amount does not match the voucher amount"
+            msg.value == _totalAmountInWei,
+            "Sent Ether amount does not match the total voucher amount"
         );
 
-        vouchers[_codeHash] = _amountInWei;
+        for (uint i = 0; i < _codeHashes.length; i++) {
+            require(vouchers[_codeHashes[i]] == 0, "Voucher already exists");
+            vouchers[_codeHashes[i]] = _etherAmount;
+        }
     }
 
     // Function to claim a voucher
-    // _code: The code to claim the voucher
-    // _to: Address to send the ether to
-    function claimVoucher(string memory _code, address _to) public {
+    function claimVoucher(
+        string memory _code,
+        address _to
+    ) public nonReentrant {
         bytes32 codeHash = keccak256(abi.encodePacked(_code));
         uint amount = vouchers[codeHash];
         require(amount > 0, "Invalid or already used voucher");
@@ -48,10 +49,10 @@ contract Voucher {
             "Contract insufficiently funded"
         );
 
-        vouchers[codeHash] = 0; // Mark the voucher as used
-        payable(_to).transfer(amount); // Transfer the ether to the provided address
+        vouchers[codeHash] = 0;
+        (bool success, ) = payable(_to).call{value: amount}("");
+        require(success, "Transfer failed");
     }
 
-    // Fallback function to receive ether
     receive() external payable {}
 }
