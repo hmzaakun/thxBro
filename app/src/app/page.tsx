@@ -3,9 +3,6 @@ import Link from "next/link";
 
 import iconCard from "/public/card.svg";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-
 
 export default function Home() {
   return (
@@ -15,24 +12,23 @@ export default function Home() {
             <div className="grid gap-4 px-10 md:grid-cols-2 md:gap-16">
               <div>
                 <h1 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem] text-primary-foreground">
-                  The complete platform for building the Web
+                  The ultimate platform for crypto prepaid cards
                 </h1>
               </div>
               <div className="flex flex-col items-start space-y-4">
                 <p className="mx-auto max-w-[700px] text-primary-foreground/80 md:text-xl">
-                  Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable.
-                  Open Source.
+                  Create and distribute prepaid crypto cards easily. Secure, user-friendly, and ideal for gift campaigns or your friends.
                 </p>
                 <div className="space-x-4">
                   <Link
-                    href="#"
+                    href="/generate"
                     className="inline-flex h-9 items-center justify-center rounded-md bg-primary-foreground px-4 py-2 text-sm font-medium text-primary shadow transition-colors hover:bg-primary-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     prefetch={false}
                   >
                     Get Started
                   </Link>
                   <Link
-                    href="#"
+                    href="/about"
                     className="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     prefetch={false}
                   >
@@ -58,31 +54,30 @@ export default function Home() {
                   New Features
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-foreground">
-                  Faster iteration. More innovation.
+                  Effortless crypto gifting. Instant redemption.
                 </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  The platform for rapid progress. Let your team focus on shipping features instead of managing
-                  infrastructure with automated CI/CD, built-in testing, and integrated collaboration.
+                  Seamlessly generate and redeem crypto cards. Perfect for targeted gift campaigns without the need for wallet addresses.
                 </p>
               </div>
             </div>
             <div className="mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3">
               <div className="grid gap-1">
-                <h3 className="text-lg font-bold text-foreground">Infinite scalability, zero config</h3>
+                <h3 className="text-lg font-bold text-foreground">Simple, scalable, and secure</h3>
                 <p className="text-sm text-muted-foreground">
-                  Enable code to run on-demand without needing to manage your own infrastructure or upgrade hardware.
+                  Easily create multiple codes at once, ideal for large-scale gift campaigns.
                 </p>
               </div>
               <div className="grid gap-1">
-                <h3 className="text-lg font-bold text-foreground">Real-time insights and controls</h3>
+                <h3 className="text-lg font-bold text-foreground">User-friendly and accessible</h3>
                 <p className="text-sm text-muted-foreground">
-                  Get granular, first-party, real-user metrics on site performance per deployment.
+                  Recipients can redeem their crypto without needing a wallet, thanks to embedded WalletConnect.
                 </p>
               </div>
               <div className="grid gap-1">
-                <h3 className="text-lg font-bold text-foreground">Personalization at the edge</h3>
+                <h3 className="text-lg font-bold text-foreground">Instant and hassle-free</h3>
                 <p className="text-sm text-muted-foreground">
-                  Deliver dynamic, personalized content, while ensuring users only see the best version of your site.
+                  Generate and send crypto cards quickly. Recipients can redeem their value instantly.
                 </p>
               </div>
             </div>
@@ -108,10 +103,10 @@ export default function Home() {
           <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight text-foreground">
-                Experience the workflow the best frontend teams love.
+                A seamless workflow for the best crypto gifting experience.
               </h2>
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Let your team focus on shipping features instead of managing infrastructure with automated CI/CD.
+                Focus on creating memorable experiences while we handle the infrastructure with automated processes and integrated collaboration tools.
               </p>
             </div>
           </div>
