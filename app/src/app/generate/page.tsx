@@ -1,10 +1,41 @@
-import React from 'react'
+'use client';
 
-import { Card } from "@/components/ui/card"
+import React from 'react'
+import { useState } from 'react';
+
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { Toast } from '@/components/ui/toast';
+
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 const generate = () => {
+  const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  
+  const handleClick = () => {
+    //à remplacer par le wallet
+    // if (!0) {
+    //   toast.error('Connect to your wallet first');
+    //   return;
+    // }
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background">
       <section className="max-w-3xl px-4 md:px-0 mb-12">
@@ -24,9 +55,50 @@ const generate = () => {
               <Input type="number" placeholder="10 for example" className="flex-1" />
             </div>
           </div>
-          <Button className="bg-primary text-primary-foreground hover:bg-primary/90 transition-colors w-full">
-            Generate 💸
-          </Button>
+          <AlertDialog open={open}>
+          <AlertDialogTrigger asChild>
+            <Button onClick={handleClick} variant="outline" className="bg-primary text-primary-foreground hover:bg-primary/90 transition-colors w-full">Generate 💸</Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="sm:max-w-[600px]">
+            <AlertDialogHeader>
+              <AlertDialogTitle>System Alert</AlertDialogTitle>
+              <AlertDialogDescription>
+                There is an issue with the payment processing system that may affect some user transactions. Our team is
+                investigating the problem and working to resolve it as soon as possible.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <div className="space-y-4 py-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Sample Code</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <pre className="whitespace-pre-wrap break-all">{`display code there`}</pre>
+                </CardContent>
+              </Card>
+              <div className="flex justify-end">
+                <Button variant="outline" onClick={handleClose}>Cancel</Button>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    const csvData =
+                      'Title,Text\nSystem Alert,"There is an issue with the payment processing system that may affect some user transactions. Our team is investigating the problem and working to resolve it as soon as possible."'
+                    const csvBlob = new Blob([csvData], { type: "text/csv" })
+                    const csvUrl = URL.createObjectURL(csvBlob)
+                    const link = document.createElement("a")
+                    link.setAttribute("href", csvUrl)
+                    link.setAttribute("download", "system-alert.csv")
+                    document.body.appendChild(link)
+                    link.click()
+                    document.body.removeChild(link)
+                  }}
+                >
+                  Export to CSV
+                </Button>
+              </div>
+            </div>
+          </AlertDialogContent>
+        </AlertDialog>
         </div>
       </Card>
     </div>
