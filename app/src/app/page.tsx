@@ -1,64 +1,121 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import Navbar from "@/components/Navbar";
+import iconCard from "/public/card.svg";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 
 export default function Home() {
   return (
-    <main className="">
-      <div className="flex flex-col min-h-[100dvh]">
-      <Navbar></Navbar>
-      <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6 grid gap-8 lg:grid-cols-2 lg:gap-16">
-            <div className="space-y-4">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-6xl">
-                Revolutionize Your Web Presence
-              </h1>
-              <p className="text-muted-foreground md:text-xl">
-                Our cutting-edge platform empowers you to build, deploy, and scale the most captivating web experiences.
-                Unlock your team's full potential and take your online presence to new heights.
-              </p>
-              <div className="flex flex-col gap-2 sm:flex-row">
-                <Link
-                  href="#"
-                  className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                  prefetch={false}
-                >
-                  Get Started
-                </Link>
-                <Link
-                  href="#"
-                  className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                  prefetch={false}
-                >
-                  Learn More
-                </Link>
+    <main className="flex-1">
+        <section className="w-full pt-12 md:pt-24 lg:pt-32 bg-primary">
+          <div className="container space-y-10 xl:space-y-16 px-4 md:px-6">
+            <div className="grid gap-4 px-10 md:grid-cols-2 md:gap-16">
+              <div>
+                <h1 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem] text-primary-foreground">
+                  The complete platform for building the Web
+                </h1>
+              </div>
+              <div className="flex flex-col items-start space-y-4">
+                <p className="mx-auto max-w-[700px] text-primary-foreground/80 md:text-xl">
+                  Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable.
+                  Open Source.
+                </p>
+                <div className="space-x-4">
+                  <Link
+                    href="#"
+                    className="inline-flex h-9 items-center justify-center rounded-md bg-primary-foreground px-4 py-2 text-sm font-medium text-primary shadow transition-colors hover:bg-primary-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                    prefetch={false}
+                  >
+                    Get Started
+                  </Link>
+                  <Link
+                    href="#"
+                    className="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                    prefetch={false}
+                  >
+                    Learn More
+                  </Link>
+                </div>
               </div>
             </div>
-            <img
-              src="/placeholder.svg"
-              width="550"
-              height="550"
+            <Image
+              src={iconCard}
+              width="1270"
+              height="300"
               alt="Hero"
-              className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full"
+              className="mx-auto aspect-[3/1] overflow-hidden rounded-t-xl object-cover"
             />
           </div>
         </section>
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
+          <div className="container space-y-12 px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm text-muted-foreground">
+                  New Features
+                </div>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-foreground">
+                  Faster iteration. More innovation.
+                </h2>
+                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  The platform for rapid progress. Let your team focus on shipping features instead of managing
+                  infrastructure with automated CI/CD, built-in testing, and integrated collaboration.
+                </p>
+              </div>
+            </div>
+            <div className="mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3">
+              <div className="grid gap-1">
+                <h3 className="text-lg font-bold text-foreground">Infinite scalability, zero config</h3>
+                <p className="text-sm text-muted-foreground">
+                  Enable code to run on-demand without needing to manage your own infrastructure or upgrade hardware.
+                </p>
+              </div>
+              <div className="grid gap-1">
+                <h3 className="text-lg font-bold text-foreground">Real-time insights and controls</h3>
+                <p className="text-sm text-muted-foreground">
+                  Get granular, first-party, real-user metrics on site performance per deployment.
+                </p>
+              </div>
+              <div className="grid gap-1">
+                <h3 className="text-lg font-bold text-foreground">Personalization at the edge</h3>
+                <p className="text-sm text-muted-foreground">
+                  Deliver dynamic, personalized content, while ensuring users only see the best version of your site.
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-center flex-col sm:flex-row items-start gap-4">
+              <Link
+                href="/generate"
+                className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                prefetch={false}
+              >
+                Generate Card
+              </Link>
+              <Link
+                href="/redeem"
+                className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                prefetch={false}
+              >
+                Redeem
+              </Link>
+            </div>
+          </div>
+        </section>
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+          <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
+            <div className="space-y-3">
+              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight text-foreground">
+                Experience the workflow the best frontend teams love.
+              </h2>
+              <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                Let your team focus on shipping features instead of managing infrastructure with automated CI/CD.
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-muted-foreground">&copy; 2024 Acme Inc. All rights reserved.</p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link href="#" className="text-xs hover:underline underline-offset-4 text-muted-foreground" prefetch={false}>
-            Terms of Service
-          </Link>
-          <Link href="#" className="text-xs hover:underline underline-offset-4 text-muted-foreground" prefetch={false}>
-            Privacy
-          </Link>
-        </nav>
-      </footer>
-    </div>
-    </main>
   );
 }
