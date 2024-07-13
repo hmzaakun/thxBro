@@ -24,11 +24,19 @@ contract Voucher is ReentrancyGuard {
         uint _etherAmount
     ) public payable isOwner {
         require(_etherAmount > 0, "Amount must be greater than 0");
+
         uint _totalAmountInWei = _etherAmount * _codeHashes.length; // total amount in wei
+        uint fee = (_totalAmountInWei * 2) / 100; // 2% fee
+        uint totalWithFee = _totalAmountInWei + fee;
+
         require(
-            msg.value == _totalAmountInWei,
-            "Sent Ether amount does not match the total voucher amount"
+            msg.value == totalWithFee,
+            "Sent Ether amount does not match the total voucher amount with fee"
         );
+
+        // Transfer fee to owner
+        (bool feeSuccess, ) = payable(owner).call{value: fee}("");
+        require(feeSuccess, "Fee transfer failed");
 
         for (uint i = 0; i < _codeHashes.length; i++) {
             require(vouchers[_codeHashes[i]] == 0, "Voucher already exists");

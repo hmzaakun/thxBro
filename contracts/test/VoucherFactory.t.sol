@@ -37,16 +37,18 @@ contract VoucherFactoryTest is Test {
         bytes32[] memory codeHashes = new bytes32[](1);
         codeHashes[0] = keccak256(abi.encodePacked("testcode"));
 
-        // Fund the voucher contract with 1 ether
+        // Fund the voucher contract with 1 ether (excluding the 2% fee)
         uint etherAmount = 1 ether;
-        payable(address(voucher)).transfer(etherAmount);
-        voucher.createVouchers{value: etherAmount}(codeHashes, etherAmount);
+        uint fee = (etherAmount * 2) / 100;
+        uint totalAmount = etherAmount + fee;
+        payable(address(voucher)).transfer(totalAmount);
+        voucher.createVouchers{value: totalAmount}(codeHashes, etherAmount);
 
         string memory code = "testcode";
         voucher.claimVoucher(code, recipient);
 
         // Verify that the recipient received the funds
-        assertEq(recipient.balance, 1 ether);
+        assertEq(recipient.balance, etherAmount);
         vm.stopPrank();
     }
 }
