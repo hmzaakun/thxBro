@@ -7,22 +7,12 @@ contract Voucher is ReentrancyGuard {
     address public owner;
     mapping(bytes32 => uint) public vouchers; // Mapping from code hash to amounts in wei
 
-    constructor(address _owner) {
-        owner = _owner;
-    }
-
-    modifier isOwner() {
-        require(
-            msg.sender == owner,
-            "Only the owner can execute this operation"
-        );
-        _;
-    }
-
-    function createVouchers(
+    constructor(
+        address _owner,
         bytes32[] memory _codeHashes,
         uint _etherAmount
-    ) public payable isOwner {
+    ) payable {
+        owner = _owner;
         require(_etherAmount > 0, "Amount must be greater than 0");
 
         uint _totalAmountInWei = _etherAmount * _codeHashes.length; // total amount in wei
@@ -42,6 +32,14 @@ contract Voucher is ReentrancyGuard {
             require(vouchers[_codeHashes[i]] == 0, "Voucher already exists");
             vouchers[_codeHashes[i]] = _etherAmount;
         }
+    }
+
+    modifier isOwner() {
+        require(
+            msg.sender == owner,
+            "Only the owner can execute this operation"
+        );
+        _;
     }
 
     // Function to claim a voucher
