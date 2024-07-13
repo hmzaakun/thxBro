@@ -54,9 +54,4 @@ contract Voucher {
 
     // Fallback function to receive ether
     receive() external payable {}
-
-    // Function to withdraw the ether from the contract by the owner
-    function withdraw() public isOwner {
-        payable(owner).transfer(address(this).balance);
-    }
 }
