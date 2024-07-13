@@ -42,15 +42,11 @@ contract VoucherFactoryTest is Test {
         payable(address(voucher)).transfer(etherAmount);
         voucher.createVouchers{value: etherAmount}(codeHashes, etherAmount);
 
-        vm.stopPrank();
-
-        // Claim the voucher
-        vm.startPrank(recipient);
         string memory code = "testcode";
         voucher.claimVoucher(code, recipient);
-        vm.stopPrank();
 
         // Verify that the recipient received the funds
         assertEq(recipient.balance, 1 ether);
+        vm.stopPrank();
     }
 }
