@@ -10,6 +10,9 @@ const Navbar = () => {
         <Link href="/" className="flex items-center justify-center" prefetch={false}>
           <Image src={iconCard} alt="card icon"  className="h-6 w-6 text-primary" />
           <span className="sr-only">ThxBro</span>
+          <h4 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem] text-primary-foreground">
+          ThxBro
+        </h4>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <Link
@@ -41,7 +44,10 @@ const Navbar = () => {
             Contact
           </Link>
         </nav>
-        <w3m-button />
+        <div className='ml-auto'>
+          <w3m-button />
+        </div>
+        
       </header>
   )
 }

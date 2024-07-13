@@ -16,14 +16,14 @@ const redeem = () => {
       <Card className="w-full max-w-md p-6 bg-card text-card-foreground shadow-lg rounded-lg">
         <div className="space-y-4">
           <div className="space-y-2">
-            <h2 className="text-2xl font-semibold">Generate</h2>
+            <h2 className="text-2xl font-semibold">Redeem</h2>
             <div className="grid gap-2">
               <label htmlFor="">My code</label>
               <Input type="text" placeholder="23745631... for example" className="flex-1" />
             </div>
           </div>
           <Button className="bg-primary text-primary-foreground hover:bg-primary/90 transition-colors w-full">
-            Generate 💸
+            I want my Money 💸
           </Button>
         </div>
       </Card>
