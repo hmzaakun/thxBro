@@ -49,6 +49,8 @@ const generate = () => {
           <div className="space-y-2">
             <h2 className="text-2xl font-semibold">Generate</h2>
             <div className="grid gap-2">
+              <label htmlFor="">Name of campaign or reason of gift</label>
+              <Input type="text" placeholder="Christmas for example" className="flex-1" />
               <label htmlFor="">How many card(s) ?</label>
               <Input type="number" placeholder="2 for example" className="flex-1" />
               <label htmlFor="">Amount of each card(s)</label>
@@ -61,19 +63,18 @@ const generate = () => {
           </AlertDialogTrigger>
           <AlertDialogContent className="sm:max-w-[600px]">
             <AlertDialogHeader>
-              <AlertDialogTitle>System Alert</AlertDialogTitle>
+              <AlertDialogTitle>Here's your gift 🥳</AlertDialogTitle>
               <AlertDialogDescription>
-                There is an issue with the payment processing system that may affect some user transactions. Our team is
-                investigating the problem and working to resolve it as soon as possible.
+                You can copy paste or directly download the CSV file containing your codes.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <div className="space-y-4 py-4">
               <Card>
                 <CardHeader>
-                  <CardTitle>Sample Code</CardTitle>
+                  <CardTitle>My Code(s) :</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <pre className="whitespace-pre-wrap break-all">{`display code there`}</pre>
+                  <pre className="whitespace-pre-wrap break-all">{`-27477382904`}</pre>
                 </CardContent>
               </Card>
               <div className="flex justify-end">
