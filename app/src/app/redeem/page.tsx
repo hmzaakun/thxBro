@@ -47,6 +47,8 @@ const redeem = () => {
           <div className="space-y-2">
             <h2 className="text-2xl font-semibold">Redeem</h2>
             <div className="grid gap-2">
+              <label htmlFor="">Name of campaign or reason of gift</label>
+              <Input type="text" placeholder="Christmas for example" className="flex-1" />
               <label htmlFor="">My code :</label>
               <Input type="text" placeholder="23745631... for example" className="flex-1" />
             </div>
