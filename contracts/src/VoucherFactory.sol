@@ -21,8 +21,15 @@ contract VoucherFactory {
 
     event VoucherContractCreated(address voucherAddress);
 
-    function createVoucherContract() public isOwner {
-        Voucher newVoucher = new Voucher(owner);
+    function createVoucherContract(
+        bytes32[] memory _codeHashes,
+        uint _etherAmount
+    ) public payable isOwner {
+        Voucher newVoucher = new Voucher{value: msg.value}(
+            owner,
+            _codeHashes,
+            _etherAmount
+        );
         voucherContracts.push(newVoucher);
         emit VoucherContractCreated(address(newVoucher));
     }

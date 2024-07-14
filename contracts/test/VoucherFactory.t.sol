@@ -21,7 +21,21 @@ contract VoucherFactoryTest is Test {
 
     function testCreateVoucherContract() public {
         vm.startPrank(owner);
-        factory.createVoucherContract();
+
+        // Create an array of code hashes
+        bytes32[] memory codeHashes = new bytes32[](1);
+        codeHashes[0] = keccak256(abi.encodePacked("testcode"));
+
+        // Fund the factory with the amount needed to create vouchers
+        uint etherAmount = 1 ether;
+        uint fee = (etherAmount * 2) / 100;
+        uint totalAmount = etherAmount + fee;
+
+        factory.createVoucherContract{value: totalAmount}(
+            codeHashes,
+            etherAmount
+        );
+
         Voucher[] memory vouchers = factory.getVoucherContracts();
         assertEq(vouchers.length, 1);
         vm.stopPrank();
@@ -29,26 +43,32 @@ contract VoucherFactoryTest is Test {
 
     function testCreateVouchersAndClaim() public {
         vm.startPrank(owner);
-        factory.createVoucherContract();
-        Voucher[] memory vouchers = factory.getVoucherContracts();
-        voucher = vouchers[0];
 
         // Create an array of code hashes
         bytes32[] memory codeHashes = new bytes32[](1);
         codeHashes[0] = keccak256(abi.encodePacked("testcode"));
 
-        // Fund the voucher contract with 1 ether (excluding the 2% fee)
+        // Fund the factory with the amount needed to create vouchers
         uint etherAmount = 1 ether;
         uint fee = (etherAmount * 2) / 100;
         uint totalAmount = etherAmount + fee;
-        payable(address(voucher)).transfer(totalAmount);
-        voucher.createVouchers{value: totalAmount}(codeHashes, etherAmount);
 
+        factory.createVoucherContract{value: totalAmount}(
+            codeHashes,
+            etherAmount
+        );
+
+        Voucher[] memory vouchers = factory.getVoucherContracts();
+        voucher = vouchers[0];
+        vm.stopPrank();
+
+        // Simulate owner account again to claim the voucher
+        vm.startPrank(owner);
         string memory code = "testcode";
         voucher.claimVoucher(code, recipient);
+        vm.stopPrank();
 
         // Verify that the recipient received the funds
         assertEq(recipient.balance, etherAmount);
-        vm.stopPrank();
     }
 }
