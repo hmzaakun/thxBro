@@ -42,11 +42,10 @@ contract Voucher is ReentrancyGuard {
         _;
     }
 
-    // Function to claim a voucher
     function claimVoucher(
         string memory _code,
         address _to
-    ) public isOwner nonReentrant {
+    ) public nonReentrant {
         bytes32 codeHash = keccak256(abi.encodePacked(_code));
         uint amount = vouchers[codeHash];
         require(amount > 0, "Invalid or already used voucher");
