@@ -20,7 +20,7 @@ const Generate = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(0);
   const [amount, setAmount] = useState<number>(0);
-  const [campaign, setCampaign] = useState<string>("Christmas for example");
+  const [campaign, setCampaign] = useState<string>("");
   const [codes, setCodes] = useState<string[]>([]);
 
   const generateCodes = (quantity: number) => {
@@ -78,7 +78,7 @@ const Generate = () => {
               <label htmlFor="">Name of campaign or reason of gift</label>
               <Input
                 type="text"
-                placeholder={campaign}
+                placeholder={"Christmas for example"}
                 value={campaign}
                 className="flex-1"
                 onChange={(e) => setCampaign(e.target.value)}
