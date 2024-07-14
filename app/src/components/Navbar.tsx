@@ -29,20 +29,6 @@ const Navbar = () => {
           >
             Redeem
           </Link>
-          <Link
-            href="/about"
-            className="text-sm font-medium hover:underline underline-offset-4 text-primary-foreground"
-            prefetch={false}
-          >
-            About
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline underline-offset-4 text-primary-foreground"
-            prefetch={false}
-          >
-            Contact
-          </Link>
         </nav>
         <div className='ml-auto'>
           <w3m-button />
